@@ -4,6 +4,7 @@
 
 This addon wraps the [Auth0 Lock] library and adds basic support for the [Auth0] authentication service to an Ember CLI project. It **requires** an [Auth0] account and application to be setup.
 
+A simple Ember CLI example using this addon is available at: [http://ember-cli-auth0-lock.divshot.io](http://ember-cli-auth0-lock.divshot.io/)
 
 ## Installation
 
