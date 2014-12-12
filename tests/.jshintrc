@@ -44,7 +44,8 @@
     "andThen",
     "currentURL",
     "currentPath",
-    "currentRouteName"
+    "currentRouteName",
+    "Auth0Lock"
   ],
   "node": false,
   "browser": false,

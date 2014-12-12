@@ -19,6 +19,6 @@ var app = new EmberAddon();
 // along with the exports of each module as its value.
 
 // Auth0 Lock dependency
-app.import('bower_components/auth0-lock/build/auth0-lock.js');
+app.import(app.bowerDirectory + '/auth0-lock/build/auth0-lock.js');
 
 module.exports = app.toTree();

@@ -13,9 +13,34 @@ module.exports = function(environment) {
       }
     },
 
+    'ember-cli-auth0-lock': {
+      // REQUIRED
+      // Auth0 credentials
+      cid: 'nu8KrtMcxWg9Ohh38TyUbn7lYmJkOwA8',
+      domain: 'cspanring.auth0.com',
+      // redirect from Auth0 when a user logs out
+      logoutUrl: 'http://localhost:4200/',
+
+      // Configurable DEFAULTS
+      // Auth0 Lock authentication options
+      authParams: {
+        scope: 'openid user_id email nickname picture'
+      },
+      // Auth0 Lock CDN url, used in production build
+      cdnUrl: 'http://cdn.auth0.com/js/lock-6.min.js'
+    },
+
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+
+    contentSecurityPolicy: {
+      'font-src': "'self' data: cdn.auth0.com",
+      'style-src': "'self' 'unsafe-inline'",
+      'script-src': "'self' 'unsafe-eval' *.auth0.com",
+      'img-src': '*.gravatar.com *.wp.com',
+      'connect-src': "'self' *.auth0.com"
     }
   };
 

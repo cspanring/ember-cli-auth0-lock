@@ -1,3 +1,15 @@
 <h2 id='title'>Welcome to Ember.js</h2>
 
+<button {{action 'login'}}>login</button>
+<button {{action 'signup'}}>signup</button>
+<button {{action 'logout'}}>logout</button>
+
+<p>
+  {{#if auth0.isAuthed}}
+  You're logged in as <b>{{auth0.profile.nickname}}</b> and you have access to the {{#link-to 'protected'}}protected route{{/link-to}}.
+  {{else}}
+  You're not logged in.
+  {{/if}}
+</p>
+
 {{outlet}}

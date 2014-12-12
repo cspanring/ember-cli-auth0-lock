@@ -2,6 +2,7 @@
   "predef": [
     "document",
     "window",
+    "Auth0Lock",
     "-Promise"
   ],
   "browser": true,
