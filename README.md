@@ -2,9 +2,7 @@
 
 # Ember-cli-auth0-lock
 
-Add basic support for the [Auth0] authentication services to your Ember CLI project.
-
-This addon **requires** an [Auth0] account and application.
+This addon wraps the [Auth0 Lock] library and adds basic support for the [Auth0] authentication service to an Ember CLI project. It **requires** an [Auth0] account and application to be setup.
 
 
 ## Installation
@@ -17,12 +15,7 @@ The addon will add following elements to your CLI project:
 * the `auth0-lock` bower dependency
 * an `initializer` that will inject an `auth0` property with user data and a wrapper around `auth0-lock` methods on controllers and routes
 * 3 actions to your application route: `login`, `signup` and `logout`
-* a mixin to require authentication on routes:
- 
-        import Auth0Protection from 'ember-cli-auth0-lock/mixins/auth0-protection';
-        export default Ember.Route.extend(Auth0Protection, {
-            ...
-        });
+* a mixin to *protect* routes with authentication:
 
 
 ## Usage
@@ -51,6 +44,57 @@ Before you can use the addon, you need to add your Auth0 **ClientID** and **Doma
 Please see the [Auth0 docs] for more information on the [authParams] configuration object.
 
 
+### Route mixin
+
+Use the `auth0-protection` mixin to require an authentication on a route:
+
+    import Ember from 'ember';
+    import Auth0Protection from 'ember-cli-auth0-lock/mixins/auth0-protection';
+
+    export default Ember.Route.extend(Auth0Protection, {
+      model: function() {
+        return ['This', 'is', 'a', 'protected', 'route'];
+      }
+    });
+
+*Note: current protection is naive in terms of that it just redirects the app to the root url if the current user is not authenticated.*
+
+*Also: an authentication check on the client won't protect any sensible data that you might serve in your application.*
+
+
+### Signup, login and logout actions
+
+The `application route` will catch any `signup`, `login` and `logout` actions that bubble up and call the corresponding method on the Lock Widget.
+
+E.g. trigger the `login` action from a template:
+
+    <button {{action 'login'}}>login</button>
+
+
+### Authentication status and data
+
+Routes and controllers expose following properties in an `auth0` object:
+
+    auth0: {
+
+      // is current user authenticated, anonymous
+      isAuthed: <bool>,
+      isAnonymous: <bool>,
+
+      // Auth0 user profile (can be customized in authParams.scope)
+      profile: {
+        user_id: <string>
+        nickname: <string>
+        email: <string>
+        picture: <string>
+      },
+
+      // Auth0 access token
+      token: <string>
+
+    }
+
+
 ## Development
 
 The **dummy** application in `./tests/dummy` contains an example integration of the addon for testing.
@@ -76,5 +120,6 @@ Visit the dummy app at [http://localhost:4200](http://localhost:4200).
 For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
 
 [Auth0]: https://auth0.com
+[Auth0 Lock]: https://github.com/auth0/lock
 [Auth0 docs]: https://docs.auth0.com
 [authParams]: https://github.com/auth0/lock/wiki/Auth0Lock-customization#authparams-object
