@@ -17,11 +17,12 @@ The addon will add following elements to your CLI project:
 * the `auth0-lock` bower dependency
 * an `initializer` that will inject an `auth0` property with user data and a wrapper around `auth0-lock` methods on controllers and routes
 * 3 actions to your application route: `login`, `signup` and `logout`
-* a mixin to *protect* a route:
-      import Auth0Protection from 'ember-cli-auth0-lock/mixins/auth0-protection';
-      export default Ember.Route.extend(Auth0Protection, {
-        ...
-      });
+* a mixin to require authentication on routes:
+ 
+        import Auth0Protection from 'ember-cli-auth0-lock/mixins/auth0-protection';
+        export default Ember.Route.extend(Auth0Protection, {
+            ...
+        });
 
 
 ## Usage
@@ -64,7 +65,7 @@ The **dummy** application in `./tests/dummy` contains an example integration of 
 
     ember server
 
-Visit the dummy app at http://localhost:4200.
+Visit the dummy app at [http://localhost:4200](http://localhost:4200).
 
 ### Running Tests
 
