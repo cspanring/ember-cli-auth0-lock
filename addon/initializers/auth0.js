@@ -31,8 +31,8 @@ var auth0 = Ember.Object.extend({
           return window.alert(err.message);
         }
 
-        this.set('isAuthed', true);
         this.set('token', token);
+        this.set('isAuthed', true);
         this.set('profile', profile);
       }.bind(this)
     );
