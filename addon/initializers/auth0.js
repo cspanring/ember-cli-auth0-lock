@@ -58,6 +58,7 @@ export function initialize(container, application) {
   application.register('auth0:main', auth0, { singleton: true });
   application.inject('controller', 'auth0', 'auth0:main');
   application.inject('route', 'auth0', 'auth0:main');
+  application.inject('adapter', 'auth0', 'auth0:main');
 
   // add APP auth0 config options
   if (auth0Config) {
