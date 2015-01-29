@@ -73,6 +73,13 @@ export function initialize(container, application) {
         this.set('lockOptions.authParams', authParams);
 
         this.authClient = new Auth0Lock(auth0Config.cid, auth0Config.domain);
+
+        // insert dummy authentication data, useful for development
+        if (auth0Config.dummy) {
+          this.set('token', auth0Config.dummyToken);
+          this.set('isAuthed', true);
+          this.set('profile', auth0Config.dummyProfile);
+        }
       }
     });
   }
