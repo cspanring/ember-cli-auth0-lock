@@ -27,8 +27,8 @@ var auth0 = Ember.Object.extend({
     Ember.debug('Auth0-user successfully logged in');
 
     this.set('token', token);
-    this.set('isAuthed', true);
     this.set('profile', profile);
+    this.set('isAuthed', true);
   },
 
   // complete Lock widget, incl. signup and reset password option
