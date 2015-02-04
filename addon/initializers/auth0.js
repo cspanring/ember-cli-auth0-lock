@@ -18,9 +18,30 @@ var auth0 = Ember.Object.extend({
   // Auth0Lock configurable options
   // https://github.com/auth0/lock/wiki/Auth0Lock-customization
   lockOptions: {
-    // allow users to reset password in login widget
-    disableResetAction: false,
-    authParams: {},
+    authParams: {}
+  },
+
+  // update authentication properties
+  setAuth: function(token, profile) {
+
+    Ember.debug('Auth0-user successfully logged in');
+
+    this.set('token', token);
+    this.set('isAuthed', true);
+    this.set('profile', profile);
+  },
+
+  // complete Lock widget, incl. signup and reset password option
+  completeLogin: function() {
+    this.authClient.show(
+      this.get('lockOptions'),
+      function onLogin(err, profile, token) {
+        if (err) {
+          return window.alert(err.message);
+        }
+        this.setAuth(token, profile);
+      }.bind(this)
+    );
   },
 
   login: function() {
@@ -30,16 +51,18 @@ var auth0 = Ember.Object.extend({
         if (err) {
           return window.alert(err.message);
         }
-
-        this.set('token', token);
-        this.set('isAuthed', true);
-        this.set('profile', profile);
+        this.setAuth(token, profile);
       }.bind(this)
     );
   },
 
   signup: function() {
-    this.authClient.showSignup();
+    this.authClient.showSignup(function(err) {
+      if (err) {
+        return window.alert(err.message);
+      }
+      this.trigger('signup');
+    }.bind(this));
   },
 
   logout: function() {
@@ -47,7 +70,6 @@ var auth0 = Ember.Object.extend({
       returnTo: this.get('logoutUrl')
     });
   }
-
 });
 
 

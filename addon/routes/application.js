@@ -3,6 +3,9 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
   actions: {
+    completeLogin: function() {
+      this.get('auth0').loginComplete();
+    },
     login: function() {
       this.get('auth0').login();
     },
