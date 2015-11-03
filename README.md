@@ -1,3 +1,5 @@
+# This project is no longer maintained. Please use the official [auth0-ember-simple-auth](https://github.com/auth0/auth0-ember-simple-auth) addon instead.
+
 [![Build Status](https://codeship.com/projects/5117ca70-6461-0132-e7fa-5e824c005685/status)](https://codeship.com/projects/52576)
 
 # Ember-cli-auth0-lock
