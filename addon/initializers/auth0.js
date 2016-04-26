@@ -73,8 +73,16 @@ var auth0 = Ember.Object.extend({
 });
 
 
-export function initialize(container, application) {
-  var config = container.lookupFactory('config:environment'),
+function lookupFactory(app, name) {
+   if (app.resolveRegistration) {
+     return app.resolveRegistration(name);
+   }
+ 
+   return app.container.lookupFactory(name);
+ }
+ 
+export function initialize(application) {
+  var config = lookupFactory(application, 'config:environment'),
       auth0Config = config ? config['ember-cli-auth0-lock'] : null;
 
   application.register('auth0:main', auth0, { singleton: true });
